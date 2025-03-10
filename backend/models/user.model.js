@@ -24,6 +24,9 @@ const userSchema = new mongoose.Schema(
       enum: ["doctor", "patient", "admin"],
       required: true,
     },
+    image : {
+      type : String
+    }
   },
   { timestamps: true }
 );
