@@ -1,7 +1,11 @@
-import express from "express";
+import express from "express"
 import cors from "cors";
 import { configDotenv } from "dotenv";
 import cookieParser from "cookie-parser";
+import connectDB from "./config/dbConnection.js";
+
+// importing routes
+import patientRoute from "./routes/patient.js"
 
 const app = express();
 
@@ -43,6 +47,10 @@ app.use((err,req,res,next)=>{
         stack : err.stack
     })
 })
+
+await connectDB();
+
+app.use('/api/patient',patientRoute)
 
 app.listen(PORT, () => {
   console.log(`server running at : http://localhost:${PORT}`);
