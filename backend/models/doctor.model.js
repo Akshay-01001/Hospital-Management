@@ -7,6 +7,15 @@ const doctorSchema = new mongoose.Schema(
       ref: "user",
       required: true,
     },
+    age: {
+      type: Number,
+      required: true,
+    },
+    gender: {
+      type: String,
+      require: true,
+      enum: ["Male", "Female", "Other"],
+    },
     specialization: {
       type: String,
       required: true,
