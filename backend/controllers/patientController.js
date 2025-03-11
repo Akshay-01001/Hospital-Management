@@ -100,10 +100,6 @@ const updatePatient = async (req, res, next) => {
     const { id } = req.params; // This is the userId
     const { age, gender, ...otherData } = req.body;
 
-    console.log(age);
-    console.log(gender);
-    console.log(otherData);
-
     // Find the user first
     const existUser = await userModel.findById(id);
     if (!existUser) {
