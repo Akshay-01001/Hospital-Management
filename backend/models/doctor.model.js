@@ -13,7 +13,7 @@ const doctorSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      require: true,
+      required: true,
       enum: ["Male", "Female", "Other"],
     },
     specialization: {
@@ -26,7 +26,7 @@ const doctorSchema = new mongoose.Schema(
     },
     availableDays: {
       type: [String],
-      emum: [
+      enum: [
         "sunday",
         "monday",
         "tuesday",
@@ -34,14 +34,19 @@ const doctorSchema = new mongoose.Schema(
         "thursday",
         "friday",
         "saturday",
-        "sunday",
       ],
       required: true,
     },
+    availableSlots: [
+      {
+        day: String, 
+        slots: [String],
+      },
+    ],
   },
   { timestamps: true }
 );
 
 const doctorModel =
-  mongoose.models.doctor || new mongoose.model("doctor", doctorSchema);
+  mongoose.models.Doctor || mongoose.model("Doctor", doctorSchema);
 export default doctorModel;

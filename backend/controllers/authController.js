@@ -2,9 +2,9 @@ import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
 import userModel from "../models/user.model.js";
 
-const login = async (req, res, next) => {
+export const login = async (req, res, next) => {
   try {
-    const { email, password } = req.body;   
+    const { email, password } = req.body;
 
     if (!email || !password) {
       return res
@@ -64,8 +64,7 @@ export const logout = async (req, res, next) => {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-        domain:
-          process.env.NODE_ENV === "production" ? "" : undefined,
+        domain: process.env.NODE_ENV === "production" ? "" : undefined,
       })
       .status(200)
       .json({ message: "Logged out successfully" });
@@ -74,4 +73,41 @@ export const logout = async (req, res, next) => {
   }
 };
 
-export {login}
+export const addAdmin = async (req, res, next) => {
+  try {
+    const { name, email, password, phone } = req.body;
+    const role = "admin";
+
+    const existAdmin = await userModel.findOne({ email });
+
+    if (existAdmin) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Admin Already Exists" });
+    }
+
+    const salt = await bcryptjs.genSalt(10);
+    const hashedPassword = await bcryptjs.hash(password, salt);
+
+    const createdAdmin = await userModel.create({
+      name,
+      email,
+      password: hashedPassword,
+      role,
+      phone,
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Admin Created Successfully",
+      data: {
+        id: createdAdmin._id,
+        name: createdAdmin.name,
+        phone: createdAdmin.phone,
+        role: createdAdmin.role,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};

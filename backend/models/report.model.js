@@ -14,7 +14,7 @@ const reportSchema = new mongoose.Schema(
     },
     patientId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "user",
+      ref: "patient",
       required: true,
     },
     description: {
