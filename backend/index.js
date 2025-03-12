@@ -8,6 +8,7 @@ import connectDB from "./config/dbConnection.js";
 import patientRoute from "./routes/patient.js"
 import authRoute from "./routes/auth.js"
 import doctorRoute from "./routes/doctor.js"
+import appointmentRoute from "./routes/appointment.js"
 
 const app = express();
 
@@ -55,6 +56,7 @@ await connectDB();
 app.use('/api/patient',patientRoute);
 app.use('/api/auth',authRoute)
 app.use('/api/doctor',doctorRoute)
+app.use('/api/appointment',appointmentRoute)
 
 app.listen(PORT, () => {
   console.log(`server running at : http://localhost:${PORT}`);

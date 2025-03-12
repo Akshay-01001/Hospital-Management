@@ -11,11 +11,23 @@ export const registerDoctor = async (req, res, next) => {
       phone,
       specialization,
       experience,
-      availableDays,
       age,
-      gender,
+      gender
     } = req.body;
     const image = req.file?.path;
+
+    let availableDays = req.body.availableDays;
+    if (typeof availableDays === "string") {
+      availableDays = JSON.parse(availableDays);
+    }
+
+    let availableSlots = req.body.availableSlots;
+    if (typeof availableSlots === "string") {
+      availableSlots = JSON.parse(availableSlots);
+    }
+
+    console.log(availableDays);
+    console.log(availableSlots);
 
     if (
       !name ||
@@ -26,7 +38,8 @@ export const registerDoctor = async (req, res, next) => {
       !experience ||
       !availableDays ||
       !age ||
-      !gender
+      !gender || 
+      !availableSlots
     ) {
       return res
         .status(400)
@@ -60,6 +73,7 @@ export const registerDoctor = async (req, res, next) => {
       availableDays,
       age,
       gender,
+      availableSlots
     });
 
     const doctorWithUser = await doctorModel
