@@ -16,10 +16,20 @@ const patientSchema = new mongoose.Schema(
       enum: ["Male", "Female", "Other"],
       required: true,
     },
-    medicalHistory: {
-      type: [String],
-      default: [],
-    },
+    medicalHistory: [
+      {
+        condition: {
+          type: String,
+          required: true,
+        },
+        diagnosisDate: {
+          type: Date,
+        },
+        notes: {
+          type: String,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );

@@ -2,19 +2,14 @@ import mongoose from "mongoose";
 
 const reportSchema = new mongoose.Schema(
   {
-    appointmentId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "appointment",
-      required: true,
-    },
-    doctorId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "doctor",
-      required: true,
-    },
     patientId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "patient",
+      required: true,
+    },
+    userId : {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",  
       required: true,
     },
     description: {

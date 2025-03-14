@@ -7,6 +7,11 @@ const medicineOrderSchema = new mongoose.Schema(
       ref: "patient",
       required: true,
     },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
     medicines: [
       {
         medicineId: {
@@ -43,4 +48,4 @@ const medicineOrderModel =
   mongoose.models.medicineOrder ||
   mongoose.model("medicineOrder", medicineOrderSchema);
 
-export default medicineOrderModel
+export default medicineOrderModel;

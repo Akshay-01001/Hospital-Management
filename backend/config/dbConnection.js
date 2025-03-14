@@ -8,7 +8,7 @@ const connectDB = async (req, res, next) => {
 
     await mongoose.connect(`${process.env.MONGO_URI}/hospital`);
   } catch (error) {
-    next(error);
+    // next(error);
   }
 };
 

@@ -33,11 +33,12 @@ export const login = async (req, res, next) => {
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
-
+    
     res.cookie("token", token, {
+      // origin: process.env.NODE_ENV === "production" ? "" : "http://localhost:5173",
       httpOnly: true,
-      secure: process.env.NODE_ENV,
-      sameSite: "strict",
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -107,6 +108,34 @@ export const addAdmin = async (req, res, next) => {
         role: createdAdmin.role,
       },
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const validateUser = async (req, res, next) => {
+  console.log("called");
+
+  try {
+    const token = req.cookies.token;
+    if (!token) {
+      return res
+        .status(401)
+        .json({ success: false, message: "Unauthenticated" });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await userModel.findById(decoded.id);
+
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: "User Not Found" });
+    }
+
+    const { name, email, role, phone } = user._doc;
+
+    return res.status(200).json({ success: true, name, email, role, phone });
   } catch (error) {
     next(error);
   }

@@ -26,5 +26,5 @@ build/
 coverage/  
 
 # Dependencies lock files  
-package-lock.json  
+# package-lock.json  
 yarn.lock  
