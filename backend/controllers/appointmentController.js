@@ -11,19 +11,16 @@ export const bookAppointment = async (req, res, next) => {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    // Check if the doctor exists
     const doctor = await doctorModel.findOne({ userId: doctorId });
     if (!doctor) {
       return res.status(404).json({ message: "Doctor not found" });
     }
 
-    // Check if the patient exists
     const patient = await patientModel.findOne({ userId: patientId });
     if (!patient) {
       return res.status(404).json({ message: "Patient not found" });
     }
 
-    // Check if the slot is valid
     const dayOfWeek = new Date(date).toLocaleString("en-IN", {
       weekday: "long",
     });
@@ -37,7 +34,6 @@ export const bookAppointment = async (req, res, next) => {
       return res.status(400).json({ message: "Invalid slot" });
     }
 
-    // Check if the slot is already full (max 4 appointments per slot)
     const existingAppointments = await appointmentModel.countDocuments({
       doctorId,
       date: new Date(date),
@@ -49,7 +45,6 @@ export const bookAppointment = async (req, res, next) => {
       return res.status(400).json({ message: "Slot is fully booked" });
     }
 
-    // Create the appointment using .create()
     await appointmentModel.create({
       patientId,
       doctorId,
