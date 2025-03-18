@@ -114,8 +114,6 @@ export const addAdmin = async (req, res, next) => {
 };
 
 export const validateUser = async (req, res, next) => {
-  console.log("called");
-
   try {
     const token = req.cookies.token;
     if (!token) {
@@ -133,9 +131,9 @@ export const validateUser = async (req, res, next) => {
         .json({ success: false, message: "User Not Found" });
     }
 
-    const { name, email, role, phone } = user._doc;
+    const { name, email, role, phone ,_id} = user._doc;
 
-    return res.status(200).json({ success: true, name, email, role, phone });
+    return res.status(200).json({ success: true, name, email, role, phone ,_id});
   } catch (error) {
     next(error);
   }
