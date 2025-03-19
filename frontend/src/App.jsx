@@ -20,6 +20,7 @@ import DoctorList from "./pages/patient/DoctorList";
 import MyAppointments from "./components/patient/MyAppointments";
 import Dashboard from "./components/patient/Dashboard";
 import MyDoctorDashboard from "./pages/doctor/MyDoctorDashboard";
+import DoctorAppointment from "./components/doctor/DoctorAppointment";
 
 // Protected Route Component
 const ProtectedRoute = ({ children, requiredRole }) => {
@@ -99,7 +100,7 @@ const App = () => {
           <Route index element={<Dashboard />} />
           <Route path="doctors" element={<DoctorList />} />
           <Route path="book-appointment" element={<DoctorList />} />
-          <Route path="my-appointments" element={<MyAppointments />} />
+          <Route path="appointments" element={<DoctorAppointment />} />
           <Route path="reports" element={<DoctorList />} />
           <Route path="medical-history" element={<DoctorList />} />
         </Route>

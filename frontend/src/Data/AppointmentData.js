@@ -38,10 +38,69 @@ export const columns = [
   },
 ];
 
+export const doctorColumns = [
+  {
+    field: "id",
+    headerName: "Sr No",
+    width: 100,
+  },
+  {
+    field: "name",
+    headerName: "Patient Name",
+    width: 180,
+  },
+  {
+    field: "email",
+    headerName: "Patient Email",
+    width: 180,
+  },
+  {
+    field: "phone",
+    headerName: "Contact Number",
+    width: 200,
+  },
+  {
+    field: "date",
+    headerName: "Appointment Date",
+    width: 220,
+  },
+  {
+    field: "time",
+    headerName: "Appointment Time",
+    width: 200,
+  },
+  {
+    field: "status",
+    headerName: "Appointment Status",
+    width: 200,
+  },
+  {
+    field: "action",
+    headerName: "Actions",
+    with: 400,
+
+    renderCell: () => {},
+  },
+];
+
 export const fetchAppointments = async (id) => {
   try {
     const response = await axios.get(
       `${import.meta.env.VITE_APP_API_URL}/appointment/get-patient/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
+    return response?.data?.data || [];
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchAppointmentsByDoctor = async (id) => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_APP_API_URL}/appointment/get-doctor/${id}`,
       {
         withCredentials: true,
       }
