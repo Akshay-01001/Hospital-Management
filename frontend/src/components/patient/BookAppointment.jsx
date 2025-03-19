@@ -41,12 +41,9 @@ const BookAppointment = ({ doctor }) => {
         let date = new Date();
         date.setDate(today.getDate() + i);
         let dayName = daysOfWeek[date.getDay()].toLowerCase();
-        console.log(dayName,"-------> dayname");
-        
 
         let slot = availableSlots.find((s) => s.day === dayName);
-        console.log(slot,"--------> slot");
-        
+     
         if (slot) {
           dates.push({
             date: date.toLocaleDateString("en-CA"),
@@ -57,8 +54,6 @@ const BookAppointment = ({ doctor }) => {
 
         if (dates.length >= 4) break; // Get only the next 4 available dates
       }
-      console.log(dates,"----> dqtes");
-      
       return dates;
     };
 

@@ -27,8 +27,6 @@ export const bookAppointment = async (req, res, next) => {
     const doctorSchedule = doctor.availableSlots.find(
       (s) => s.day === dayOfWeek.toLowerCase()
     );
-    console.log(doctorSchedule);
-    console.log(time);
 
     if (!doctorSchedule || !doctorSchedule.slots.includes(time)) {
       return res.status(400).json({ message: "Invalid slot" });
@@ -129,6 +127,21 @@ export const getAppointmentsByDoctor = async (req, res, next) => {
       .find({ doctorId })
       .populate("doctorId", "name email")
       .populate("patientId", "name email");
+    return res.status(200).json({ success: true, data: appointments });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getAppointmentsByPatient = async (req, res, next) => {
+  try {
+    console.log("here");
+
+    const { patientId } = req.params;
+    console.log(patientId);
+    const appointments = await appointmentModel
+      .find({ patientId })
+      .populate("doctorId", "name email phone image");
     return res.status(200).json({ success: true, data: appointments });
   } catch (error) {
     next(error);
