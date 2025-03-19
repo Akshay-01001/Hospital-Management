@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import SideNavbar from "../sideNavbar/SideNavbar";
-import Navbar from "../sideNavbar/Navbar";
+import SideNavbar from "../Navbar/SideNavbar";
+import Navbar from "../Navbar/Navbar";
 
 function MyPatientDashboard() {
   const [toggle, setToggle] = useState(false);
