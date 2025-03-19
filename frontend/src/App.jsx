@@ -19,6 +19,7 @@ import MyPatientDashboard from "./components/patient/MyPatientDashboard";
 import DoctorList from "./pages/patient/DoctorList";
 import MyAppointments from "./components/patient/MyAppointments";
 import Dashboard from "./components/patient/Dashboard";
+import MyDoctorDashboard from "./pages/doctor/MyDoctorDashboard";
 
 // Protected Route Component
 const ProtectedRoute = ({ children, requiredRole }) => {
@@ -35,6 +36,7 @@ const ProtectedRoute = ({ children, requiredRole }) => {
 const App = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  
 
   useEffect(() => {
     const validateUser = async () => {
@@ -59,7 +61,6 @@ const App = () => {
       <ToastContainer />
 
       <Routes>
-        {/* Redirect logged-in users to their respective dashboards */}
         <Route
           path="/"
           element={
@@ -76,6 +77,22 @@ const App = () => {
           element={
             <ProtectedRoute requiredRole="patient">
               <MyPatientDashboard />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<Dashboard />} />
+          <Route path="doctors" element={<DoctorList />} />
+          <Route path="book-appointment" element={<DoctorList />} />
+          <Route path="my-appointments" element={<MyAppointments />} />
+          <Route path="reports" element={<DoctorList />} />
+          <Route path="medical-history" element={<DoctorList />} />
+        </Route>
+
+        <Route
+          path="/doctor/dashboard"
+          element={
+            <ProtectedRoute requiredRole="doctor">
+              <MyDoctorDashboard />
             </ProtectedRoute>
           }
         >
