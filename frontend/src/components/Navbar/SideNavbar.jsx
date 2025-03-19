@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import SpaceDashboardOutlinedIcon from "@mui/icons-material/SpaceDashboardOutlined";
-import AssignmentTurnedInOutlinedIcon from '@mui/icons-material/AssignmentTurnedInOutlined';
-import SummarizeOutlinedIcon from '@mui/icons-material/SummarizeOutlined';
-import MedicalServicesOutlinedIcon from '@mui/icons-material/MedicalServicesOutlined';
+import AssignmentTurnedInOutlinedIcon from "@mui/icons-material/AssignmentTurnedInOutlined";
+import SummarizeOutlinedIcon from "@mui/icons-material/SummarizeOutlined";
+import MedicalServicesOutlinedIcon from "@mui/icons-material/MedicalServicesOutlined";
 
 const SideNavbar = ({ toggle }) => {
   const { user } = useSelector((state) => state.auth);
@@ -41,10 +41,21 @@ const SideNavbar = ({ toggle }) => {
       },
     ],
     doctor: [
-      { name: "Dashboard", path: "dashboard" },
-      { name: "My Patients", path: "my-patients" },
-      { name: "Appointments", path: "appointments" },
-      { name: "Medical Records", path: "medical-records" },
+      {
+        name: "Dashboard",
+        path: "dashboard",
+        icon: <SpaceDashboardOutlinedIcon />,
+      },
+      {
+        name: "Appointments",
+        path: "appointments",
+        icon: <AssignmentTurnedInOutlinedIcon />,
+      },
+      {
+        name: "Medical Records",
+        path: "medical-records",
+        icon: <SummarizeOutlinedIcon />,
+      },
     ],
     admin: [
       { name: "Dashboard", path: "dashboard" },
