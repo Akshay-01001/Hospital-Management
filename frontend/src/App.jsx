@@ -17,6 +17,8 @@ import axios from "axios";
 import Login from "./pages/Auth/Login";
 import MyPatientDashboard from "./components/patient/MyPatientDashboard";
 import DoctorList from "./pages/patient/DoctorList";
+import MyAppointments from "./components/patient/MyAppointments";
+import Dashboard from "./components/patient/Dashboard";
 
 // Protected Route Component
 const ProtectedRoute = ({ children, requiredRole }) => {
@@ -77,10 +79,10 @@ const App = () => {
             </ProtectedRoute>
           }
         >
-          <Route index element={<DoctorList />} />
+          <Route index element={<Dashboard />} />
           <Route path="doctors" element={<DoctorList />} />
           <Route path="book-appointment" element={<DoctorList />} />
-          <Route path="my-appointments" element={<DoctorList />} />
+          <Route path="my-appointments" element={<MyAppointments />} />
           <Route path="reports" element={<DoctorList />} />
           <Route path="medical-history" element={<DoctorList />} />
         </Route>

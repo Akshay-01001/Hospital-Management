@@ -6,14 +6,14 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 
-const Navbar = () => {
+const Navbar = ({ toggle, setToggle }) => {
   const popupRef = useRef(null);
   const [isOpenPopup, setOpenPopup] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (popupRef.current && !popupRef.current.contains(e.target)) {
-        setOpenPopup(false); 
+        setOpenPopup(false);
       }
     };
 
@@ -27,18 +27,25 @@ const Navbar = () => {
   }, [isOpenPopup]);
 
   return (
-    <div className="w-full py-4 text-white bg-[#3695EB] flex justify-between items-center">
-      <div className="px-10 w-[25%]">
+    <div className="w-full py-4 text-white bg-[#3695EB] flex justify-between items-center transition-all">
+      <div
+        className={`${
+          !toggle ? "w-[25%] px-10" : "flex justify-center items-center w-[7%]"
+        } transition-all duration-300`}
+      >
         <div className="flex gap-3 items-center">
           <img src={logo} alt="" className="h-10 w-10" />
-          <p className="font-semibold text-xl">Medical Dashboard</p>
+          {!toggle && (
+            <p className="font-semibold text-xl">Medical Dashboard</p>
+          )}
         </div>
       </div>
 
-      <div className="w-full h-14 flex items-center justify-between px-4 pt-3 relative">
+      <div className="w-full h-14 flex items-center justify-between px-8 pt-3 relative">
         <div className="w-10 h-10 cursor-pointer">
           <DensityMediumOutlinedIcon
             style={{ width: "30px", height: "30px" }}
+            onClick={() => setToggle(!toggle)}
           />
         </div>
 
@@ -56,7 +63,7 @@ const Navbar = () => {
             />
           </div>
         </div>
-        
+
         {isOpenPopup && (
           <div
             className="absolute bg-white h-28 w-40 z-50 right-2 top-17 shadow-md"
