@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
-import { doctorColumns, fetchAppointmentsByDoctor } from "../../Data/AppointmentData.js";
+import { doctorColumns, fetchAppointmentsByDoctor } from "../../Data/AppointmentData";
 
 const DoctorAppointment = () => {
   const [appointments, setAppointments] = useState([

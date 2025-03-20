@@ -21,6 +21,7 @@ import MyAppointments from "./components/patient/MyAppointments";
 import Dashboard from "./components/patient/Dashboard";
 import MyDoctorDashboard from "./pages/doctor/MyDoctorDashboard";
 import DoctorAppointment from "./components/doctor/DoctorAppointment";
+import MyAdminDashboard from "./pages/admin/MyAdminDashboard";
 
 // Protected Route Component
 const ProtectedRoute = ({ children, requiredRole }) => {
@@ -55,7 +56,7 @@ const App = () => {
     };
 
     validateUser();
-  }, [dispatch]);
+  }, [dispatch,user]);
 
   return (
     <Router>
@@ -94,6 +95,22 @@ const App = () => {
           element={
             <ProtectedRoute requiredRole="doctor">
               <MyDoctorDashboard />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<Dashboard />} />
+          <Route path="doctors" element={<DoctorList />} />
+          <Route path="book-appointment" element={<DoctorList />} />
+          <Route path="appointments" element={<DoctorAppointment />} />
+          <Route path="reports" element={<DoctorList />} />
+          <Route path="medical-history" element={<DoctorList />} />
+        </Route>
+
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <MyAdminDashboard />
             </ProtectedRoute>
           }
         >
