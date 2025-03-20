@@ -59,10 +59,12 @@ const SideNavbar = ({ toggle }) => {
     ],
     admin: [
       { name: "Dashboard", path: "dashboard" },
-      { name: "Manage Users", path: "manage-users" },
       { name: "Appointments", path: "appointments" },
       { name: "Reports", path: "reports" },
       { name: "System Settings", path: "settings" },
+      { name: "Doctors List", path: "doctors" },
+      { name: "Medicines", path: "medicines" },
+      { name: "Add Admin", path: "add-admin" },
     ],
   };
 

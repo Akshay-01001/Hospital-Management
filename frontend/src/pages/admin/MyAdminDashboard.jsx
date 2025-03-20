@@ -3,7 +3,7 @@ import SideNavbar from "../../components/Navbar/SideNavbar";
 import Navbar from "../../components/Navbar/Navbar";
 import { Outlet } from "react-router-dom";
 
-const MyDoctorDashboard = () => {
+const MyAdminDashboard = () => {
   const [toggle, setToggle] = useState(false);
   return (
     <div className="relative max-w-screen h-screen flex flex-col">
@@ -23,4 +23,4 @@ const MyDoctorDashboard = () => {
   );
 };
 
-export default MyDoctorDashboard;
+export default MyAdminDashboard;

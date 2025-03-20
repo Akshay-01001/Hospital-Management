@@ -33,9 +33,9 @@ export const login = async (req, res, next) => {
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
-    
+
     res.cookie("token", token, {
-      // origin: process.env.NODE_ENV === "production" ? "" : "http://localhost:5173",
+      origin: process.env.NODE_ENV === "production" ? "" : "http://localhost:5174",
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
@@ -62,10 +62,11 @@ export const logout = async (req, res, next) => {
   try {
     res
       .clearCookie("token", {
-        httpOnly: true,
+        origin: process.env.NODE_ENV === "production" ? "" : "http://localhost:5174",
         secure: process.env.NODE_ENV === "production",
         sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
         domain: process.env.NODE_ENV === "production" ? "" : undefined,
+        path: "/",
       })
       .status(200)
       .json({ message: "Logged out successfully" });
@@ -131,9 +132,11 @@ export const validateUser = async (req, res, next) => {
         .json({ success: false, message: "User Not Found" });
     }
 
-    const { name, email, role, phone ,_id} = user._doc;
+    const { name, email, role, phone, _id } = user._doc;
 
-    return res.status(200).json({ success: true, name, email, role, phone ,_id});
+    return res
+      .status(200)
+      .json({ success: true, name, email, role, phone, _id });
   } catch (error) {
     next(error);
   }

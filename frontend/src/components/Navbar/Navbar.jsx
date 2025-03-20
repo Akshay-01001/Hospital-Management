@@ -5,6 +5,7 @@ import DensityMediumOutlinedIcon from "@mui/icons-material/DensityMediumOutlined
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
+import axios from "axios";
 
 const Navbar = ({ toggle, setToggle }) => {
   const popupRef = useRef(null);
@@ -25,6 +26,17 @@ const Navbar = ({ toggle, setToggle }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpenPopup]);
+
+  const handleLogout = async()=>{
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/auth/logout`,{},{
+        withCredentials : true
+      })
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="w-full py-4 text-white bg-[#3695EB] flex justify-between items-center transition-all">
@@ -79,7 +91,8 @@ const Navbar = ({ toggle, setToggle }) => {
                 <p className="text-black text-sm">My Profile</p>
               </div>
             </div>
-            <div className="h-1/2 w-full hover:bg-black/20 transition-all duration-300 cursor-pointer">
+            <div className="h-1/2 w-full hover:bg-black/20 transition-all duration-300 cursor-pointer"
+            onClick={handleLogout}>
               <div className="flex items-center gap-2 h-full w-full px-2">
                 <LogoutIcon style={{ color: "red" }} />
                 <p className="text-black text-sm">LOGOUT</p>

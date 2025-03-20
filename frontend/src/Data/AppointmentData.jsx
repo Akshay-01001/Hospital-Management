@@ -1,4 +1,7 @@
 import axios from "axios";
+import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import { Tooltip } from "@mui/material";
 
 export const columns = [
   {
@@ -47,39 +50,52 @@ export const doctorColumns = [
   {
     field: "name",
     headerName: "Patient Name",
-    width: 180,
+    width: 140,
   },
   {
     field: "email",
     headerName: "Patient Email",
-    width: 180,
+    width: 200,
   },
   {
     field: "phone",
     headerName: "Contact Number",
-    width: 200,
+    width: 180,
   },
   {
     field: "date",
     headerName: "Appointment Date",
-    width: 220,
+    width: 170,
   },
   {
     field: "time",
     headerName: "Appointment Time",
-    width: 200,
+    width: 170,
   },
   {
     field: "status",
     headerName: "Appointment Status",
-    width: 200,
+    width: 160,
   },
   {
     field: "action",
     headerName: "Actions",
-    with: 400,
+    width: 130,
 
-    renderCell: () => {},
+    renderCell: (params) => (
+      <div className="w-full flex gap-4 h-full items-center">
+        <Tooltip title="Accept Appointment">
+          <button className="bg-green-500 hover:bg-green-600 transition-colors duration-300 text-white w-7 h-7 flex justify-center items-center rounded-full cursor-pointer">
+            <CheckOutlinedIcon />
+          </button>
+        </Tooltip>
+        <Tooltip title="cancel appointment">
+          <button className="bg-red-500 hover:bg-red-600 transition-colors duration-300 text-white w-7 h-7 flex justify-center items-center rounded-full cursor-pointer">
+            <CloseOutlinedIcon />
+          </button>
+        </Tooltip>
+      </div>
+    ),
   },
 ];
 
